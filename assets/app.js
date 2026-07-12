@@ -120,8 +120,8 @@
         blurb: 'Book a demo, ask about partnerships, or just say hello.',
         items: [
           { href: 'contact.html',               icon: 'calendar',  title: 'Book a demo',       desc: '15-minute walkthrough' },
-          { href: 'mailto:hello@pulsinglabs.pk',  icon: 'mail',      title: 'General & support', desc: 'hello@pulsinglabs.pk' },
-          { href: 'mailto:sales@pulsinglabs.pk',  icon: 'briefcase', title: 'Corporate sales',   desc: 'Demos & partnerships' },
+          { href: 'mailto:contact@pulsinglabs.com',  icon: 'mail',      title: 'General & support', desc: 'contact@pulsinglabs.com' },
+          { href: 'mailto:contact@pulsinglabs.com',  icon: 'briefcase', title: 'Corporate sales',   desc: 'Demos & partnerships' },
           { href: 'contact.html',               icon: 'chat',      title: 'Send a message',    desc: 'Use the contact form' }
         ] } }
   ];
@@ -151,7 +151,7 @@
       'mm.5.b': 'Our mission: make your health make sense, for everyone.',
       'mm.5.0t': 'About us', 'mm.5.0d': 'Our mission & story', 'mm.5.1t': 'The PulsingLabs App', 'mm.5.1d': 'Everything it does', 'mm.5.2t': 'For Business', 'mm.5.2d': 'Corporate wellness', 'mm.5.3t': 'FAQ', 'mm.5.3d': 'Common questions', 'mm.5.4t': 'Contact', 'mm.5.4d': 'Talk to us',
       'mm.6.b': 'Book a demo, ask about partnerships, or just say hello.',
-      'mm.6.0t': 'Book a demo', 'mm.6.0d': '15-minute walkthrough', 'mm.6.1t': 'General & support', 'mm.6.1d': 'hello@pulsinglabs.pk', 'mm.6.2t': 'Corporate sales', 'mm.6.2d': 'Demos & partnerships', 'mm.6.3t': 'Send a message', 'mm.6.3d': 'Use the contact form',
+      'mm.6.0t': 'Book a demo', 'mm.6.0d': '15-minute walkthrough', 'mm.6.1t': 'General & support', 'mm.6.1d': 'contact@pulsinglabs.com', 'mm.6.2t': 'Corporate sales', 'mm.6.2d': 'Demos & partnerships', 'mm.6.3t': 'Send a message', 'mm.6.3d': 'Use the contact form',
       'foot.product': 'Product', 'foot.business': 'Business', 'foot.company': 'Company',
       'foot.tagline': "Book lab tests, understand your results, and track your family's health, all in one app.",
       'foot.rights': 'All rights reserved.', 'foot.made': 'Made with care in Pakistan',
@@ -286,7 +286,7 @@
       'pr.q3': 'What counts as an "active employee"?', 'pr.a3': 'Any approved employee account that logged at least one activity, an appointment booked or a result viewed, in the billing month.',
       'pr.q4': 'Is my health data private from my employer?', 'pr.a4': 'Always. Corporate dashboards show only anonymised, aggregate statistics. Employers never see individual test values or personal health records.',
       'pr.q5': 'Can I cancel anytime?', 'pr.a5': 'Yes. Cancel from your account settings and access continues to the end of the current billing period. No lock-in.',
-      'pr.q6': 'Do you offer non-profit or academic discounts?', 'pr.a6': 'Yes, email <a href="mailto:hello@pulsinglabs.pk" style="color:var(--teal-d);font-weight:700;">hello@pulsinglabs.pk</a> and we will sort out special pricing.',
+      'pr.q6': 'Do you offer non-profit or academic discounts?', 'pr.a6': 'Yes, email <a href="mailto:contact@pulsinglabs.com" style="color:var(--teal-d);font-weight:700;">contact@pulsinglabs.com</a> and we will sort out special pricing.',
       'pr.cta.h': 'Start free today', 'pr.cta.p': 'Individuals start instantly. Businesses get a 30-day trial, no card required.', 'pr.cta.b1': 'Get the app', 'pr.cta.b2': 'Talk to sales',
       'biz.heroB1': 'Book a demo <span class="arrow">→</span>', 'biz.heroB2': 'See pricing',
       'biz.stats.eye': 'The cost of poor health', 'biz.stats.h2': 'Ill health is expensive, and largely preventable.', 'biz.stats.lead': 'Sick days, lost productivity and late diagnoses quietly drain your business. Preventive screening is one of the highest-ROI benefits you can offer.',
@@ -340,7 +340,7 @@
       'ct.lbl.name': 'Full name', 'ct.lbl.email': 'Email', 'ct.lbl.company': 'Company (optional)', 'ct.lbl.interest': 'I am interested in', 'ct.lbl.msg': 'Message',
       'ct.ph.name': 'Your name', 'ct.ph.company': 'Company name', 'ct.ph.msg': 'How can we help?',
       'ct.opt1': 'Booking a corporate demo', 'ct.opt2': 'Lab / clinic partnership', 'ct.opt3': 'General question', 'ct.opt4': 'Support',
-      'ct.form.btn': 'Send message <span class="arrow">→</span>', 'ct.form.ok': 'Thanks, your message is on its way! We will be in touch shortly.', 'ct.form.err': 'Something went wrong. Please email hello@pulsinglabs.pk.',
+      'ct.form.btn': 'Send message <span class="arrow">→</span>', 'ct.form.ok': 'Thanks, your message is on its way! We will be in touch shortly.', 'ct.form.err': 'Something went wrong. Please email contact@pulsinglabs.com.',
       'ct.cta.h': 'Prefer to just try it?', 'ct.cta.p': 'Download PulsingLabs and start understanding your results in minutes, no demo needed.', 'ct.cta.btn': 'Get the app <span class="arrow">→</span>'
     }
   };
@@ -449,7 +449,7 @@
         '</div>' +
         '<div class="foot-bottom mf-bottom">' +
           '<span class="mf-logo">' + LOGO_SVG + ' PulsingLabs</span>' +
-          '<span>© <span id="yr"></span> PulsingLabs · <a href="privacy.html" data-i18n="foot.privacy">Privacy</a> · <a href="faq.html" data-i18n="foot.faq">FAQ</a> · <a href="mailto:labs@pulsinglabs.pk" data-i18n="foot.labs">Labs &amp; clinics</a></span>' +
+          '<span>© <span id="yr"></span> PulsingLabs · <a href="privacy.html" data-i18n="foot.privacy">Privacy</a> · <a href="faq.html" data-i18n="foot.faq">FAQ</a> · <a href="mailto:contact@pulsinglabs.com" data-i18n="foot.labs">Labs &amp; clinics</a></span>' +
           '<span data-i18n="foot.made">Made with care in Pakistan</span>' +
         '</div>' +
       '</div></footer>';
@@ -1404,7 +1404,7 @@
             f.querySelectorAll('input, textarea').forEach(function (i) { if (i.type !== 'submit') i.value = ''; });
           })
           .catch(function () {
-            if (err) { err.textContent = 'Could not reach our server. Please email hello@pulsinglabs.pk.'; err.style.display = 'block'; }
+            if (err) { err.textContent = 'Could not reach our server. Please email contact@pulsinglabs.com.'; err.style.display = 'block'; }
           })
           .then(function () { if (btn) { btn.disabled = false; btn.innerHTML = label; } });
       });
