@@ -318,8 +318,10 @@ body.mega-open .mega-backdrop { opacity: 1; visibility: visible; pointer-events:
   position: fixed; inset: 0; z-index: 9999; background: var(--grad-teal);
   display: grid; place-items: center; transform: translateY(100%); pointer-events: none;
 }
-.page-curtain .pc-logo { display:flex; align-items:center; gap:14px; color:#fff; font-family: 'Quicksand', 'General Sans', sans-serif; font-weight:700; font-size:32px; opacity:0; transform: translateY(10px); }
-.page-curtain .pc-logo .logo-mark { width: 42px; height: 42px; object-fit: contain; }
+/* Same lockup as the header .logo (Quicksand 400, mark:text 2:1, gap 10px),
+   scaled x1.5 for the full-screen moment. */
+.page-curtain .pc-logo { display:flex; align-items:center; gap:15px; color:#fff; font-family: 'Quicksand', 'General Sans', sans-serif; font-weight:400; font-size:42px; letter-spacing:-.01em; opacity:0; transform: translateY(10px); }
+.page-curtain .pc-logo .logo-mark { width: 84px; height: 84px; object-fit: contain; }
 .page-curtain.cover { transform: translateY(0); transition: transform .55s var(--ease-curtain); }
 .page-curtain.cover .pc-logo { opacity:1; transform: translateY(0); transition: opacity .4s .15s, transform .4s .15s; }
 .page-curtain.reveal { transform: translateY(-100%); transition: transform .6s var(--ease-curtain); }
