@@ -449,7 +449,7 @@
         '</div>' +
         '<div class="foot-bottom mf-bottom">' +
           '<span class="mf-logo">' + LOGO_SVG + ' PulsingLabs</span>' +
-          '<span>© <span id="yr"></span> PulsingLabs · <a href="privacy.html" data-i18n="foot.privacy">Privacy</a> · <a href="faq.html" data-i18n="foot.faq">FAQ</a> · <a href="mailto:contact@pulsinglabs.com" data-i18n="foot.labs">Labs &amp; clinics</a></span>' +
+          '<span>© <span id="yr"></span> PulsingLabs · <a href="privacy.html" data-i18n="foot.privacy">Privacy</a> · <a href="faq.html" data-i18n="foot.faq">FAQ</a> · <a href="mailto:muneeb@pulsinglabs.com" data-i18n="foot.labs">Labs &amp; clinics</a></span>' +
           '<span data-i18n="foot.made">Made with care in Pakistan</span>' +
         '</div>' +
       '</div></footer>';
