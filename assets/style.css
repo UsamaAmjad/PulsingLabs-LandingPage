@@ -318,8 +318,10 @@ body.mega-open .mega-backdrop { opacity: 1; visibility: visible; pointer-events:
   position: fixed; inset: 0; z-index: 9999; background: var(--grad-teal);
   display: grid; place-items: center; transform: translateY(100%); pointer-events: none;
 }
-.page-curtain .pc-logo { display:flex; align-items:center; gap:14px; color:#fff; font-family: 'Quicksand', 'General Sans', sans-serif; font-weight:700; font-size:32px; opacity:0; transform: translateY(10px); }
-.page-curtain .pc-logo .logo-mark { width: 42px; height: 42px; object-fit: contain; }
+/* Same lockup as the header .logo (Quicksand 400, mark:text 2:1, gap 10px),
+   scaled x1.5 for the full-screen moment. */
+.page-curtain .pc-logo { display:flex; align-items:center; gap:15px; color:#fff; font-family: 'Quicksand', 'General Sans', sans-serif; font-weight:400; font-size:42px; letter-spacing:-.01em; opacity:0; transform: translateY(10px); }
+.page-curtain .pc-logo .logo-mark { width: 84px; height: 84px; object-fit: contain; }
 .page-curtain.cover { transform: translateY(0); transition: transform .55s var(--ease-curtain); }
 .page-curtain.cover .pc-logo { opacity:1; transform: translateY(0); transition: opacity .4s .15s, transform .4s .15s; }
 .page-curtain.reveal { transform: translateY(-100%); transition: transform .6s var(--ease-curtain); }
@@ -866,7 +868,7 @@ html.anim .media.photo.no-reveal-clip { clip-path: none; }
 }
 
 /* --- Image entrance: photos fade in when their bytes arrive (bindImgFade
-   adds html.imgfade + per-img .ld on load). OPACITY ONLY — never put
+   adds html.imgfade + per-img .ld on load). OPACITY ONLY; never put
    transform/transition:all on .media-img (parallax history: JS owns transform).
    Without JS the imgfade class never lands, so images show normally. --- */
 html.imgfade img.media-img,
@@ -1441,7 +1443,7 @@ footer.site.mf .mf-bottom a { display: inline; color: rgba(255,255,255,.62); mar
 footer.site.mf .mf-bottom a:hover { color: var(--teal-l); padding-left: 0; }
 @media (max-width: 900px) {
   footer.site.mf { border-radius: 26px 26px 0 0; padding: 90px 0 30px; }
-  /* tighter photo→footer rhythm on phones (180px reads as a hole) */
+  /* tighter photo-to-footer rhythm on phones (180px reads as a hole) */
   .scene { padding-bottom: 96px; }
   .mf-cards { grid-template-columns: 1fr; }
   .mf-menu { grid-column: 1; grid-row: auto; text-align: left; }
