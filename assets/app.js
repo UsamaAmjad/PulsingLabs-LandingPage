@@ -552,6 +552,12 @@
     var backdrop = document.getElementById('navBackdrop');
     var bar = document.querySelector('.scroll-bar');
 
+    // Auto-hide header: slides up on scroll-down, reappears on scroll-up.
+    // Skipped entirely under reduced-motion (header just stays put).
+    var hideEnabled = !reducedMotion();
+    var lastY = window.scrollY || document.documentElement.scrollTop;
+    var REVEAL_TOP = 80; // always visible near the top, no flicker on load
+
     function onScroll() {
       var y = window.scrollY || document.documentElement.scrollTop;
       if (nav) nav.classList.toggle('scrolled', y > 12);
@@ -559,6 +565,18 @@
         var h = document.documentElement.scrollHeight - window.innerHeight;
         bar.style.width = (h > 0 ? (y / h) * 100 : 0) + '%';
       }
+      if (hideEnabled && nav) {
+        // never hide while the mobile drawer or a mega dropdown is in use
+        var menuOpen = (links && links.classList.contains('open')) ||
+                       document.body.classList.contains('mega-open') ||
+                       nav.querySelector('.has-mega.open');
+        if (y <= REVEAL_TOP || y < lastY || menuOpen) {
+          nav.classList.remove('nav-hidden');
+        } else if (y > lastY) {
+          nav.classList.add('nav-hidden');
+        }
+      }
+      lastY = y;
     }
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
@@ -901,6 +919,27 @@
   }
 
   /* Clip-path wipe reveal on photographic media panels */
+  function bindImgFade() {
+    // Photos fade in the moment their bytes finish arriving, instead of
+    // painting scanline-by-scanline on slow connections (owner bug report:
+    // result.jpeg visibly streamed top-to-bottom on first load). Opacity
+    // only, gated behind html.imgfade so no-JS/reduced-motion users simply
+    // see images normally. Runs on ALL devices including touch.
+    if (reducedMotion()) return;
+    var imgs = document.querySelectorAll('img.media-img, img.scene-img, img.sec-bg-img');
+    if (!imgs.length) return;
+    document.documentElement.classList.add('imgfade');
+    imgs.forEach(function (img) {
+      var done = function () { img.classList.add('ld'); };
+      if (img.complete && img.naturalWidth > 0) { done(); return; }
+      img.addEventListener('load', done);
+      img.addEventListener('error', done); // never leave a broken img invisible
+    });
+    // Safety net: whatever happens (cache oddities, decode stalls), nothing
+    // stays invisible for more than 3s.
+    setTimeout(function () { imgs.forEach(function (i) { i.classList.add('ld'); }); }, 3000);
+  }
+
   function bindClipReveal() {
     // Touch devices skip the wipe entirely (html.anim never added, so photos
     // are simply visible): a missed IntersectionObserver tick during a fast
@@ -1511,6 +1550,7 @@
     splitHeadlines();
     // bindParallax() and bindScene() intentionally not called: photos on the
     // site must stay static, not drift/expand on scroll.
+    bindImgFade();
     bindClipReveal();
     bindSpotlight();
     bindLenis();
