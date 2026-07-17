@@ -823,6 +823,9 @@ html.theme-dark .s-dark::after, html.theme-dark .dark::after { opacity: .6; }
   transition-duration: .75s, .85s, .75s;
   transition-delay: calc(.35s + var(--wi, 0) * .055s);
 }
+/* End state MUST outrank the rule above (it beats the generic .split-in .w on
+   specificity, which left hero words permanently blurred — bug). */
+.hero h1.split-in .w { opacity: 1; transform: none; filter: none; }
 /* Signature moment: an underline sweeps beneath the key gradient word once
    the headline has landed (scaleX 0->1, compositor-only). */
 .hero h1 .grad-text { position: relative; display: inline-block; }
