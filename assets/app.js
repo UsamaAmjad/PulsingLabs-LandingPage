@@ -655,19 +655,48 @@
   /* Scroll reveal (IntersectionObserver)                               */
   /* ------------------------------------------------------------------ */
   function bindReveal() {
-    var els = document.querySelectorAll('.reveal, .reveal-l, .reveal-r, .reveal-zoom');
+    var els = [].slice.call(document.querySelectorAll('.reveal, .reveal-l, .reveal-r, .reveal-zoom'));
+    if (!els.length) return;
     if (!('IntersectionObserver' in window)) { els.forEach(function (el) { el.classList.add('in'); }); return; }
-    // Pre-trigger well below the fold so content is already revealed by the time
-    // the user scrolls to it (fixes the "waiting for content to appear" lag).
-    // Touch scrolling flings much faster than wheel: pre-reveal further below
-    // the fold so content never appears "missing" mid-fling.
-    var pre = window.matchMedia('(hover: none)').matches ? '48%' : '22%';
+
+    // How far below the fold to pre-reveal (fraction of a viewport). Touch flings
+    // fast AND iOS Safari DEFERS IntersectionObserver callbacks during momentum
+    // scrolling — that was the "text appears late on the stacked cards, dark one
+    // takes forever" bug. So on touch we pre-reveal ~a full screen early.
+    var touch = window.matchMedia('(hover: none)').matches;
+    var pre = touch ? 0.9 : 0.22;
+
+    // Primary path: IntersectionObserver (efficient, smooth staggered reveals).
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
-        if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+        if (en.isIntersecting) { en.target.classList.add('in'); en.target.__shown = true; io.unobserve(en.target); }
       });
-    }, { threshold: 0, rootMargin: '0px 0px ' + pre + ' 0px' });
+    }, { threshold: 0, rootMargin: '0px 0px ' + Math.round(pre * 100) + '% 0px' });
     els.forEach(function (el) { io.observe(el); });
+
+    // Safety net: getBoundingClientRect stays accurate even when iOS defers the
+    // observer, so a scroll-driven sweep reveals on time regardless. rAF-throttled.
+    function sweep() {
+      var vh = window.innerHeight;
+      for (var i = 0; i < els.length; i++) {
+        var el = els[i];
+        if (el.__shown) continue;
+        var r = el.getBoundingClientRect();
+        if (r.top < vh * (1 + pre) && r.bottom > 0) {
+          el.classList.add('in'); el.__shown = true; io.unobserve(el);
+        }
+      }
+    }
+    var ticking = false;
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () { ticking = false; sweep(); });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    sweep();
+    setTimeout(sweep, 400); // catch late layout (fonts/images) settling
   }
 
   /* ------------------------------------------------------------------ */
@@ -739,7 +768,12 @@
     var fx = document.createElement('div'); fx.id = 'bgfx'; document.body.appendChild(fx);
 
     var root = document.documentElement;
-    var darkEls = document.querySelectorAll('.s-dark, .dark');
+    // Stacked spotlight cards are excluded (owner: "the card in that color is
+    // enough") — a dark .stack-card styles ITSELF dark via CSS and must not
+    // drag the whole page through the theme crossfade. Driving 3 root vars
+    // every scroll frame while a sticky card crawls past centre forced a
+    // full-page style recalc per frame = the features-page lag.
+    var darkEls = document.querySelectorAll('.s-dark:not(.stack-card), .dark:not(.stack-card)');
     if (!darkEls.length) return;
 
     // SCROLL-PROGRESSIVE crossfade (owner request — no hard flip): the page
@@ -761,6 +795,13 @@
              Math.round(a[2] + (b[2] - a[2]) * t);
     }
 
+    // iOS Safari colours its own toolbar/status-bar by sampling edge pixels
+    // when no theme-color meta is set — that sampling lags our JS crossfade,
+    // which reads as the toolbar "jumping" a beat behind the page (owner
+    // report on mobile). Driving the meta tag ourselves, every frame, in the
+    // exact same loop, makes the browser chrome track the page exactly.
+    var themeMeta = document.getElementById('themeColorMeta');
+
     var ticking = false;
     function apply() {
       ticking = false;
@@ -774,10 +815,12 @@
         if (k > t) t = k;
       });
       var e = t * t * (3 - 2 * t); // smoothstep — gentle at both ends
-      root.style.setProperty('--pg-bg', mix(LIGHT.bg, DARK.bg, e));
+      var bg = mix(LIGHT.bg, DARK.bg, e);
+      root.style.setProperty('--pg-bg', bg);
       root.style.setProperty('--pg-fg', mix(LIGHT.fg, DARK.fg, e));
       root.style.setProperty('--pg-muted', mix(LIGHT.muted, DARK.muted, e));
       root.classList.toggle('theme-dark', e >= 0.5);
+      if (themeMeta) themeMeta.setAttribute('content', 'rgb(' + bg + ')');
     }
     function onScroll() {
       if (!ticking) { ticking = true; requestAnimationFrame(apply); }
@@ -1402,13 +1445,58 @@
         var p = 1 - (nt - TOP) / Math.max(window.innerHeight - TOP, 1);
         p = Math.max(0, Math.min(1, p));
         cards[i].style.transform = p > 0 ? 'scale(' + (1 - p * 0.05).toFixed(4) + ')' : '';
-        cards[i].style.filter = p > 0 ? 'brightness(' + (1 - p * 0.16).toFixed(3) + ')' : '';
+        // Dim via a ::after overlay opacity (--peel, compositor-only) instead of
+        // filter:brightness() — filtering a full-width sticky section repainted
+        // it every scroll frame and was a big part of the stack-scroll jank.
+        cards[i].style.setProperty('--peel', p > 0 ? (p * 0.55).toFixed(3) : '0');
       }
     }
     window.addEventListener('scroll', function () {
       if (!ticking) { ticking = true; requestAnimationFrame(upd); }
     }, { passive: true });
     window.addEventListener('resize', upd, { passive: true });
+    upd();
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* Scroll-drawn progress rail — homepage "Three steps to clarity".    */
+  /* A teal line fills top->bottom with scroll progress through the     */
+  /* stack; each step lights as the fill reaches its card. Compositor-  */
+  /* only (--flow scaleY + class toggles), rAF-throttled.               */
+  /* ------------------------------------------------------------------ */
+  function bindFlowRail() {
+    var stack = document.querySelector('#how .stack');
+    if (!stack) return;
+    stack.classList.add('flow');
+    var cards = [].slice.call(stack.querySelectorAll('.stack-card'));
+    if (reducedMotion()) {
+      stack.style.setProperty('--flow', 1);
+      cards.forEach(function (c) { c.classList.add('lit'); });
+      return;
+    }
+    var ticking = false;
+    function upd() {
+      ticking = false;
+      var r = stack.getBoundingClientRect();
+      if (r.height < 2) return;
+      var vh = window.innerHeight;
+      // fill starts as the stack's top passes 80% of the viewport and
+      // completes when its bottom clears 55% — so the line finishes while
+      // the section is still comfortably on screen.
+      var p = (vh * 0.8 - r.top) / (r.height + vh * 0.25);
+      p = Math.max(0, Math.min(1, p));
+      stack.style.setProperty('--flow', p.toFixed(4));
+      var railH = r.height - 60; // matches the 30px top/bottom insets
+      cards.forEach(function (c) {
+        var center = c.offsetTop + c.offsetHeight / 2 - 30;
+        c.classList.toggle('lit', p * railH >= center);
+      });
+    }
+    function onScroll() {
+      if (!ticking) { ticking = true; requestAnimationFrame(upd); }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
     upd();
   }
 
@@ -1562,6 +1650,7 @@
     bindBodyOrbit();
     bindKinetic();
     bindStack();
+    bindFlowRail();
     bindFooterReveal();
     bindDepth();
     bindRing();
