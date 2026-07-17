@@ -1450,6 +1450,48 @@
   }
 
   /* ------------------------------------------------------------------ */
+  /* Scroll-drawn progress rail — homepage "Three steps to clarity".    */
+  /* A teal line fills top->bottom with scroll progress through the     */
+  /* stack; each step lights as the fill reaches its card. Compositor-  */
+  /* only (--flow scaleY + class toggles), rAF-throttled.               */
+  /* ------------------------------------------------------------------ */
+  function bindFlowRail() {
+    var stack = document.querySelector('#how .stack');
+    if (!stack) return;
+    stack.classList.add('flow');
+    var cards = [].slice.call(stack.querySelectorAll('.stack-card'));
+    if (reducedMotion()) {
+      stack.style.setProperty('--flow', 1);
+      cards.forEach(function (c) { c.classList.add('lit'); });
+      return;
+    }
+    var ticking = false;
+    function upd() {
+      ticking = false;
+      var r = stack.getBoundingClientRect();
+      if (r.height < 2) return;
+      var vh = window.innerHeight;
+      // fill starts as the stack's top passes 80% of the viewport and
+      // completes when its bottom clears 55% — so the line finishes while
+      // the section is still comfortably on screen.
+      var p = (vh * 0.8 - r.top) / (r.height + vh * 0.25);
+      p = Math.max(0, Math.min(1, p));
+      stack.style.setProperty('--flow', p.toFixed(4));
+      var railH = r.height - 60; // matches the 30px top/bottom insets
+      cards.forEach(function (c) {
+        var center = c.offsetTop + c.offsetHeight / 2 - 30;
+        c.classList.toggle('lit', p * railH >= center);
+      });
+    }
+    function onScroll() {
+      if (!ticking) { ticking = true; requestAnimationFrame(upd); }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    upd();
+  }
+
+  /* ------------------------------------------------------------------ */
   /* Live public stats — progressive enhancement over baked-in numbers  */
   /* ------------------------------------------------------------------ */
   function bindLiveStats() {
@@ -1599,6 +1641,7 @@
     bindBodyOrbit();
     bindKinetic();
     bindStack();
+    bindFlowRail();
     bindFooterReveal();
     bindDepth();
     bindRing();

@@ -903,6 +903,26 @@ html.lenis, html.lenis body { height: auto; }
 
 /* --- Sticky card-stack ("How it works" peel) --- */
 .stack { position: relative; }
+/* Scroll-drawn progress rail (homepage How-it-works): a teal line fills
+   downward as the section scrolls through the viewport (JS drives --flow
+   0..1, transform-only), and each step's number lights up as the line
+   reaches its card. .flow is added by bindFlowRail() — no JS, no rail. */
+.stack.flow { padding-left: 34px; }
+.stack.flow::before, .stack.flow::after {
+  content: ""; position: absolute; left: 10px; top: 30px; bottom: 30px;
+  width: 3px; border-radius: 3px;
+}
+.stack.flow::before { background: rgba(var(--pg-fg), .12); }
+.stack.flow::after {
+  background: linear-gradient(180deg, #4DEAD0, #00BFA5);
+  box-shadow: 0 0 12px rgba(0,191,165,.35);
+  transform: scaleY(var(--flow, 0)); transform-origin: top center;
+}
+.stack.flow .stack-card .sc-num {
+  filter: grayscale(.6) brightness(.92); opacity: .7;
+  transition: filter .45s var(--ease), opacity .45s var(--ease), transform .45s var(--ease);
+}
+.stack.flow .stack-card.lit .sc-num { filter: none; opacity: 1; transform: scale(1.06); }
 .stack-card {
   position: sticky; min-height: 300px; margin-bottom: 26px; border-radius: var(--radius-lg);
   padding: clamp(28px, 4vw, 52px); display: grid; grid-template-columns: 88px 1fr; gap: 28px; align-items: center;
@@ -1278,6 +1298,8 @@ html.theme-dark #to-top .arr { stroke: var(--teal-l); }
   .reveal .eyebrow::before, .reveal-l .eyebrow::before, .reveal-r .eyebrow::before { width: 28px !important; }
   .w { opacity: 1 !important; transform: none !important; filter: none !important; }
   .hero h1 .grad-text::after { transform: scaleX(1) !important; }
+  .stack.flow::after { transform: scaleY(1) !important; }
+  .stack.flow .stack-card .sc-num { filter: none !important; opacity: 1 !important; }
   .hero .page-enter > .lead, .hero .page-enter > .hero-cta,
   .hero .page-enter > .hero-cta ~ * { opacity: 1 !important; transform: none !important; }
   .media .media-img { top: 0 !important; height: 100% !important; }
