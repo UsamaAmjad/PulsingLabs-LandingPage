@@ -962,6 +962,30 @@
   }
 
   /* Clip-path wipe reveal on photographic media panels */
+  function bindVideoAutoplay() {
+    // iOS Low Power Mode (and some data-saver modes) block muted autoplay and
+    // show a play button instead. A user gesture lifts the block — so retry
+    // .play() on the first touch/scroll/click, and when a video scrolls into
+    // view. Videos are muted loops, so silent playback is always safe.
+    var vids = [].slice.call(document.querySelectorAll('video[autoplay]'));
+    if (!vids.length) return;
+    function tryPlay() {
+      vids.forEach(function (v) {
+        if (v.paused) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+      });
+    }
+    ['touchstart', 'scroll', 'click'].forEach(function (ev) {
+      window.addEventListener(ev, tryPlay, { passive: true });
+    });
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) tryPlay(); });
+      }, { threshold: 0.2 });
+      vids.forEach(function (v) { io.observe(v); });
+    }
+    tryPlay();
+  }
+
   function bindImgFade() {
     // Photos fade in the moment their bytes finish arriving, instead of
     // painting scanline-by-scanline on slow connections (owner bug report:
@@ -1639,6 +1663,7 @@
     // bindParallax() and bindScene() intentionally not called: photos on the
     // site must stay static, not drift/expand on scroll.
     bindImgFade();
+    bindVideoAutoplay();
     bindClipReveal();
     bindSpotlight();
     bindLenis();
