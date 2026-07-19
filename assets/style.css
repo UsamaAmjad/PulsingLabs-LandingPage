@@ -55,7 +55,11 @@ html.theme-dark {
 .btn:focus-visible, .card:focus-visible { outline-offset: 2px; }
 /* Anchor targets land clear of the fixed header instead of underneath it. */
 [id] { scroll-margin-top: 96px; }
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; background: #fff; overflow-x: hidden; }
+/* overflow-x: CLIP (not hidden) — hidden turns html/body into a scroll
+   container, which silently breaks `position: sticky` everywhere (killed the
+   How-it-works card-stack peel). clip prevents horizontal overflow WITHOUT
+   establishing a scroll container, so sticky keeps working. */
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; background: #fff; overflow-x: clip; }
 /* Long headline words must be able to break rather than force the page wider
    than the phone screen (the mobile hero-overflow fix). */
 h1, h2, .display { overflow-wrap: break-word; }
@@ -65,7 +69,7 @@ body {
   line-height: 1.6;
   background: transparent;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 /* full-screen theme background layer, crossfades light<->dark on scroll */
 #bgfx { position: fixed; inset: 0; z-index: -1; background: rgb(var(--pg-bg)); transition: background-color var(--theme-ms) var(--ease); will-change: background-color; }
@@ -263,7 +267,10 @@ html.theme-dark section:not(.s-dark) .split.boxed .split-copy .split-list li::be
 .logo .dot .logo-mark { width: 56px; height: 56px; object-fit: contain; }
 .nav-links { display: flex; align-items: center; gap: 6px; }
 .nav-links a {
-  position: relative; font-size: 15px; font-weight: 600; color: rgb(var(--pg-fg));
+  position: relative; font-size: 16px; color: rgb(var(--pg-fg));
+  /* Same typeface as the PulsingLabs wordmark (owner request) — Quicksand,
+     regular weight, not the old bold. Applies on desktop + mobile drawer. */
+  font-family: 'Quicksand', 'General Sans', sans-serif; font-weight: 500; letter-spacing: -.01em;
   padding: 8px 14px; border-radius: 100px; transition: color var(--theme-ms) var(--ease), background .2s;
 }
 .nav-links a:hover { color: var(--teal-d); background: var(--bg-mint); }
@@ -695,6 +702,14 @@ footer.site a:hover { color: var(--teal-l); padding-left: 4px; }
   .display { font-size: clamp(38px, 12vw, 60px); }
   .hero h1, .page-hero h1 { font-size: clamp(32px, 8.6vw, 46px); }
   .hero p.lead, .page-hero .lead { font-size: 16.5px; }
+  /* Floating badges shrink + hug the corners on phones so they stop covering
+     the card's own rows (overlap seen on mobile). */
+  .media .badge-float { padding: 9px 12px; gap: 8px; border-radius: 13px; }
+  .media .badge-float .bf-ic { width: 30px; height: 30px; border-radius: 9px; }
+  .media .badge-float b { font-size: 12px; }
+  .media .badge-float span { font-size: 10.5px; }
+  .media .bf-tl { top: 10px; left: 10px; }
+  .media .bf-br { bottom: 10px; right: 10px; }
 }
 
 /* =====================================================================
@@ -1364,6 +1379,11 @@ html.theme-dark #to-top .arr { stroke: var(--teal-l); }
   .body3d-grid { grid-template-columns: 1fr; gap: 22px; }
   .body3d-stage { height: 430px; }
   .b3d-chip.c2 { left: 2%; }
+  /* Sticky card-stack is a desktop delight; the peel (bindStack) is disabled
+     on mobile, so the tall cards would just pile up under the header on a short
+     phone screen. Let them flow normally instead — the flow rail still fills
+     and lights each step as you scroll past it. */
+  .stack-card { position: relative; top: auto !important; min-height: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   .b3d-chip, .body3d-glow { animation: none; }
