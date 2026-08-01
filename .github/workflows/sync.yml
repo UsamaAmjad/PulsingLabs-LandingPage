@@ -12,7 +12,6 @@ permissions:
 jobs:
   sync:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -21,8 +20,21 @@ jobs:
 
       - name: Sync with upstream
         run: |
+          # 1. Set Git identity so it can create a merge commit
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # 2. Add upstream remote and fetch the new commits
           git remote add upstream https://github.com/Muneeb-hassan96/PulsingLabs-LandingPage.git
           git fetch upstream
+          
+          # 3. Checkout your main branch (with your own commits)
           git checkout main
-          git merge upstream/main --no-edit
+          
+          # 4. Merge the parent repo. 
+          # -X theirs automatically accepts parent changes if there is a conflict.
+          # --no-edit prevents Git from opening a text editor for the commit message.
+          git merge upstream/main -X theirs --no-edit
+          
+          # 5. Push the successfully merged code to your fork
           git push origin main
