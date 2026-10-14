@@ -231,7 +231,7 @@
       'bento.b7h': 'AI that speaks Urdu', 'bento.b7p': 'Ask your health questions in Urdu, too.',
       'how.eyebrow': 'How it works', 'how.h2': 'Three steps to clarity',
       'how.s1h': 'Choose a package', 'how.s1p': 'Browse 50+ curated blood-test packages, or scan an existing report to import it.',
-      'how.s2h': 'Pick lab & time', 'how.s2p': 'Select a partner lab or home collection, then a slot that works for you.',
+      'how.s2h': 'Pick a time & lab', 'how.s2p': 'Choose a time for your home visit, then the partner lab that collects and tests your sample.',
       'how.s3h': 'Get results + insights', 'how.s3p': 'Results arrive in-app with charts, trends, and AI explanations you understand.',
       'why.eyebrow': 'Why it matters', 'why.h2': 'Most chronic illness is caught far too late.',
       'why.lead': 'Diabetes, high cholesterol and thyroid disorders develop silently for years. Early screening changes the outcome. PulsingLabs makes it effortless.',
@@ -254,11 +254,11 @@
       'pg.faq.eyebrow': 'Help centre', 'pg.faq.h1': 'Frequently <span class="grad-text">asked</span>', 'pg.faq.lead': 'Everything about booking, results, privacy and the corporate plan. Can\'t find it? <a href="contact.html" style="color:var(--teal-l);font-weight:600;">Get in touch.</a>',
       'pg.biz.eyebrow': 'For Business', 'pg.biz.h1': 'Healthier teams,<br><span class="grad-text">lower absenteeism</span>', 'pg.biz.lead': 'Give employees preventive screening and wellness, with an HR dashboard that turns it into insight, without ever exposing individual medical data.',
       'pg.ins.eyebrow': 'Insights', 'pg.ins.h1': 'Learn about<br><span class="grad-text">your health</span>', 'pg.ins.lead': 'Plain-English guides to understanding your lab results and staying ahead of chronic illness.',
-      'pg.price.eyebrow': 'Pricing', 'pg.price.h1': 'Simple, <span class="grad-text">transparent</span> pricing', 'pg.price.lead': 'Three simple test packages - pick the depth you want. Pay once per package, no subscription, and book at home or a partner lab.',
+      'pg.price.eyebrow': 'Pricing', 'pg.price.h1': 'Simple, <span class="grad-text">transparent</span> pricing', 'pg.price.lead': 'Two test packages - pick the depth you want. Pay once per package, no subscription, and a phlebotomist collects your sample at home.',
       'pg.about.eyebrow': 'Our mission', 'pg.about.h1': 'Make your health<br><span class="grad-text">make sense</span>', 'pg.about.lead': 'Lab reports shouldn\'t need a medical degree to read. PulsingLabs turns confusing numbers into clear, personal understanding, for everyone.',
       'pg.priv.eyebrow': 'Legal', 'pg.priv.h1': 'Privacy <span class="grad-text">Policy</span>', 'pg.priv.lead': 'Your health data is sensitive. Here\'s exactly how we handle it.',
       'pg.contact.eyebrow': 'Get in touch', 'pg.contact.h1': 'Let\'s <span class="grad-text">talk</span>', 'pg.contact.lead': 'Book a demo, ask about partnerships, or just say hello. We usually reply within one business day.',
-      'feat.s1.eye': 'Book in minutes', 'feat.s1.h2': 'From "I should get tested" to booked, in two minutes.', 'feat.s1.lead': 'Pick a package, choose a partner lab or home collection, and grab a slot. No queues, no phone calls, pay online or at the lab.',
+      'feat.s1.eye': 'Book in minutes', 'feat.s1.h2': 'From "I should get tested" to booked, in two minutes.', 'feat.s1.lead': 'Pick a package, choose a time for your home visit and the lab that collects your sample, and pay in the app. No queues, no phone calls, no trip to a lab.',
       'feat.s1.li1': '50+ curated blood-test packages', 'feat.s1.li2': 'Real-time slot availability per lab', 'feat.s1.li3': 'Home sample collection at your door',
       'feat.s2.eye': 'Understand your results', 'feat.s2.h2': 'See exactly where you stand.', 'feat.s2.lead': 'Every marker sits on a clinical zone chart (Normal, Borderline, High), tuned to your age and sex, with a plain-English explanation underneath.',
       'feat.s2.li1': 'Colour-coded healthy ranges, not raw numbers', 'feat.s2.li2': 'Age-, sex- & pregnancy-aware reference ranges', 'feat.s2.li3': 'Trends across months and years',
@@ -269,17 +269,17 @@
       'feat.s4.li1': 'OCR reads photos & PDFs, you just confirm', 'feat.s4.li2': 'Imports join the same trend charts', 'feat.s4.li3': 'Separate profile per family member',
       'feat.more.eye': 'And more', 'feat.more.h2': 'Built into every plan',
       'feat.more.c1h': 'Proactive insights', 'feat.more.c1p': 'A "what changed" alert when a new result trends into an abnormal range.',
-      'feat.more.c2h': 'Flexible payment', 'feat.more.c2p': 'Pay online or at the lab, no subscription required for individuals.',
+      'feat.more.c2h': 'Secure online payment', 'feat.more.c2p': 'Pay by card or wallet in the app when you book, no subscription required for individuals.',
       'feat.more.c3h': 'Private & secure', 'feat.more.c3p': 'Encrypted in transit, never sold, and yours to export anytime.',
       'feat.how.eye': 'How it works', 'feat.how.h2': 'Three steps to clarity',
       'feat.how.s1h': 'Choose a package', 'feat.how.s1p': 'Browse 50+ packages, or scan an existing report to import it.',
-      'feat.how.s2h': 'Pick lab & time', 'feat.how.s2p': 'Select a partner lab or home collection, then a slot that works for you.',
+      'feat.how.s2h': 'Pick a time & lab', 'feat.how.s2p': 'Choose a time for your home visit, then the partner lab that collects and tests your sample.',
       'feat.how.s3h': 'Get results + insights', 'feat.how.s3p': 'Results arrive with charts, trends, and AI explanations.',
       'feat.cta.h': 'Ready to understand your health?', 'feat.cta.p': 'Get started free, pay only for the tests you book.', 'feat.cta.btn': 'Get Started <span class="arrow">→</span>',
       'pr.p1.h': 'Personal', 'pr.p1.amt': 'Free<span> app</span>', 'pr.p1.desc': 'Pay only for the test packages you book.',
       'pr.p1.l1': 'All 50+ test packages', 'pr.p1.l2': 'AI result explanations & trends', 'pr.p1.l3': 'Family member profiles', 'pr.p1.l4': 'Home sample collection', 'pr.p1.l5': 'Import reports from any lab', 'pr.p1.l6': 'Pay online or at the lab', 'pr.p1.btn': 'Get Started',
       'pr.tag': 'MOST POPULAR', 'pr.p2.h': 'Corporate', 'pr.p2.amt': 'PKR 1,500<span> / employee / mo</span>', 'pr.p2.desc': '30-day free trial. Cancel anytime.',
-      'pr.p2.l1': 'Everything in Personal, for every employee', 'pr.p2.l2': 'HR dashboard & aggregate analytics', 'pr.p2.l3': 'Proactive wellness alerts', 'pr.p2.l4': 'AI HR assistant', 'pr.p2.l5': 'CSV export & PDF employee reports', 'pr.p2.l6': 'Dedicated account manager', 'pr.p2.btn': 'Start free trial',
+      'pr.p2.l1': 'Everything in Personal, for every employee', 'pr.p2.l2': 'HR dashboard & aggregate analytics', 'pr.p2.l3': 'Proactive wellness alerts', 'pr.p2.l4': 'AI HR assistant', 'pr.p2.l5': 'CSV export & PDF participation reports', 'pr.p2.l6': 'Dedicated account manager', 'pr.p2.btn': 'Start free trial',
       'pr.p3.h': 'Labs & Clinics', 'pr.p3.amt': 'Custom', 'pr.p3.desc': 'Branded patient portal & API result delivery.',
       'pr.p3.l1': 'Branded patient-facing portal', 'pr.p3.l2': 'REST API for result uploads', 'pr.p3.l3': 'Automated patient notifications', 'pr.p3.l4': 'Result history & trend charts', 'pr.p3.l5': 'SLA-backed uptime', 'pr.p3.btn': 'Contact sales',
       'pr.note': 'Prices shown in PKR per package. Every test in a package is included in the one price, confirmed before you book.',
@@ -295,7 +295,7 @@
       'biz.stats.eye': 'The cost of poor health', 'biz.stats.h2': 'Ill health is expensive, and largely preventable.', 'biz.stats.lead': 'Sick days, lost productivity and late diagnoses quietly drain your business. Preventive screening is one of the highest-ROI benefits you can offer.',
       'biz.s1': 'employees affected by work-related ill health*', 'biz.s2': 'average sick days per employee, per year*', 'biz.s3': 'of early-stage conditions are manageable if caught in time*', 'biz.s4': 'free trial, no credit card required',
       'biz.wyg.eye': 'What you get', 'biz.wyg.h2': 'An HR wellness platform, not a spreadsheet.',
-      'biz.wyg.l1': 'Company dashboard with aggregate wellness analytics', 'biz.wyg.l2': 'Proactive alerts when the team\'s health needs attention', 'biz.wyg.l3': 'AI HR assistant for appointments & roster questions', 'biz.wyg.l4': 'One-click employee invites & CSV exports', 'biz.wyg.l5': 'Individual employee health reports (PDF)', 'biz.wyg.l6': 'Privacy-first: employees\' results stay private to them',
+      'biz.wyg.l1': 'Company dashboard with aggregate wellness analytics', 'biz.wyg.l2': 'Proactive alerts when the team\'s health needs attention', 'biz.wyg.l3': 'AI HR assistant for appointments & roster questions', 'biz.wyg.l4': 'One-click employee invites & CSV exports', 'biz.wyg.l5': 'Individual participation reports (PDF), never test results', 'biz.wyg.l6': 'Privacy-first: employees\' results stay private to them',
       'biz.calc.h': 'What does poor health cost you?', 'biz.calc.sub': 'Estimate the annual cost of employee sick days, and what prevention could save.',
       'biz.calc.lab1': 'Number of employees', 'biz.calc.r1': 'Employees', 'biz.calc.lab2': 'Avg. sick days per employee / year', 'biz.calc.r2': 'Sick days', 'biz.calc.lab3': 'Avg. daily cost per employee (PKR)', 'biz.calc.r3': 'Daily cost',
       'biz.calc.cap': 'estimated annual cost of absenteeism, preventive screening helps cut it.',
@@ -324,8 +324,8 @@
       'ins.a6h': 'Health checks by age', 'ins.a6p': 'Which screenings make sense in your 20s, 30s, 40s and beyond, for the whole family.',
       'ins.nl.eye': 'Stay in the loop', 'ins.nl.h2': 'Get launch updates & health tips', 'ins.nl.p': 'Occasional emails about new features and understanding your health. No spam.', 'ins.nl.btn': 'Subscribe', 'ins.nl.ok': 'Thanks, you are on the list!', 'ins.nl.err': 'Could not subscribe right now. Please try again later.',
       'fq.s1.eye': 'Using PulsingLabs', 'fq.s2.eye': 'Results & AI', 'fq.s3.eye': 'Privacy & billing',
-      'fq.u1q': 'How do I book a test?', 'fq.u1a': 'Pick a package, choose a partner lab or home collection, select a slot, and confirm. You can pay online or at the lab. The whole flow takes a couple of minutes.',
-      'fq.u2q': 'Do you offer home sample collection?', 'fq.u2a': 'Yes, a certified phlebotomist visits your home at your chosen time. Your results flow into the app just like an in-lab visit.',
+      'fq.u1q': 'How do I book a test?', 'fq.u1a': 'Pick a package, add your address, choose a time and a partner lab, then pay in the app. A phlebotomist comes to you. The whole flow takes a couple of minutes.',
+      'fq.u2q': 'Do you offer home sample collection?', 'fq.u2a': 'Yes, every booking is a home visit: a certified phlebotomist comes to your home at your chosen time, and your results appear in the app.',
       'fq.u3q': 'Can I import results from another lab?', 'fq.u3a': 'Yes. Snap a photo or upload a PDF of any lab report and PulsingLabs reads the values (you confirm them), so they join your trends and charts.',
       'fq.u4q': 'Can I manage my family\'s health too?', 'fq.u4a': 'Yes. Add profiles for parents, kids and your spouse, each with age- and sex-aware reference ranges, all from one account.',
       'fq.u5q': 'Is the app available in Urdu?', 'fq.u5a': 'The app itself is in English, but the AI health assistant can chat with you in Urdu if you prefer.',
@@ -440,7 +440,7 @@
         '</div>' +
         '<div class="foot-bottom mf-bottom">' +
           '<span class="mf-logo">' + LOGO_SVG + ' PulsingLabs</span>' +
-          '<span>© <span id="yr"></span> PulsingLabs · <a href="privacy.html" data-i18n="foot.privacy">Privacy</a> · <a href="pricing.html#faq" data-i18n="foot.faq">FAQ</a></span>' +
+          '<span>© <span id="yr"></span> PulsingLabs · <a href="privacy.html" data-i18n="foot.privacy">Privacy</a> · <a href="terms.html">Terms</a> · <a href="refunds.html">Refunds</a> · <a href="pricing.html#faq" data-i18n="foot.faq">FAQ</a></span>' +
         '</div>' +
       '</div></footer>';
 
