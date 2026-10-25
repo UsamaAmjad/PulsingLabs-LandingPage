@@ -17,11 +17,11 @@
   // Backend API base for live data (public, unauthenticated endpoints only).
   // Auto-detects: localhost/file:// -> local Node on :3000; anything else -> the
   // production API host below. Set PROD_API_BASE before deploying the site.
-  var PROD_API_BASE = 'https://pulsinglabs.onrender.com/api'; // the live backend (Render). api.pulsinglabs.pk never existed, so forms failed until 2026-10-23
+  var PROD_API_BASE = 'https://api.pulsinglabs.com/api'; // the live backend (Render, custom domain since 2026-10-24; pulsinglabs.onrender.com still answers)
   // The business's local phone and address (the payment gateway requires them on
   // the site). Fill these two and every page shows them: footer, contact page,
   // the service policy on how-it-works. Left empty, those lines stay hidden.
-  var BUSINESS = { phone: '', address: '' };
+  var BUSINESS = { phone: '+92 333 5556534', address: 'Saima Mall & Residency, Gulshan-e-Iqbal, Karachi' };
   var _devHost =/^(localhost|127\.|0\.0\.0\.0|10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.)/;
   var API_BASE = (location.protocol === 'file:' || _devHost.test(location.hostname))
     ? 'http://localhost:3000/api'
